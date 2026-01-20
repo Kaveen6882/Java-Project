@@ -1,0 +1,56 @@
+
+
+
+package utility;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
+public class DBClass {
+
+   
+
+    String db = "lms_project";
+    String user = "root";
+    String password = "12345678";
+    String host = "localhost:3306";
+    private Connection con;
+
+    public void connect() throws SQLException {
+        String url = "jdbc:mysql://" + host + "/" + db;
+        con = DriverManager.getConnection(url, user, password);
+        System.out.println("connection successfull");
+    }
+
+    public ResultSet selectRecord(String sql) throws SQLException {
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        return rs;
+    }
+
+    public int insert(String sql) throws SQLException {
+        Statement stmt = con.createStatement();
+        int result = stmt.executeUpdate(sql);
+        return result;
+    }
+
+    public int update(String sql) throws SQLException {
+        Statement stmt = con.createStatement();
+        int result = stmt.executeUpdate(sql);
+        return result;
+    }
+
+    public int delete(String sql) throws SQLException {
+        Statement stmt = con.createStatement();
+        int result = stmt.executeUpdate(sql);
+        return result;
+    }
+
+    public void closeCon() throws SQLException {
+        con.close();
+
+    }
+}
